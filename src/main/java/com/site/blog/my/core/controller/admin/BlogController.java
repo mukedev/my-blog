@@ -4,10 +4,13 @@ import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.service.BlogService;
 import com.site.blog.my.core.service.CategoryService;
+import com.site.blog.my.core.service.TagService;
 import com.site.blog.my.core.util.MyBlogUtils;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +43,8 @@ public class BlogController {
     private BlogService blogService;
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private TagService tagService;
 
     @GetMapping("/blogs/list")
     @ResponseBody
@@ -61,6 +66,7 @@ public class BlogController {
     @GetMapping("/blogs/edit")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
+        request.setAttribute("tags", tagService.getAllTags());
         request.setAttribute("categories", categoryService.getAllCategories());
         return "admin/edit";
     }
@@ -73,6 +79,7 @@ public class BlogController {
             return "error/error_400";
         }
         request.setAttribute("blog", blog);
+        request.setAttribute("tags", tagService.getAllTags());
         request.setAttribute("categories", categoryService.getAllCategories());
         return "admin/edit";
     }
@@ -82,7 +89,7 @@ public class BlogController {
     public Result save(@RequestParam("blogTitle") String blogTitle,
                        @RequestParam(name = "blogSubUrl", required = false) String blogSubUrl,
                        @RequestParam("blogCategoryId") Integer blogCategoryId,
-                       @RequestParam("blogTags") String blogTags,
+                       @RequestParam("blogTagId") Integer blogTagId,
                        @RequestParam("blogContent") String blogContent,
                        @RequestParam("blogCoverImage") String blogCoverImage,
                        @RequestParam("blogStatus") Byte blogStatus,
@@ -93,19 +100,22 @@ public class BlogController {
         if (blogTitle.trim().length() > 150) {
             return ResultGenerator.genFailResult("标题过长");
         }
-        if (StringUtils.isEmpty(blogTags)) {
-            return ResultGenerator.genFailResult("请输入文章标签");
+        if (StringUtils.isEmpty(blogTagId)) {
+        	return ResultGenerator.genFailResult("请选择文章标签");
         }
-        if (blogTags.trim().length() > 150) {
-            return ResultGenerator.genFailResult("标签过长");
-        }
+//        if (StringUtils.isEmpty(blogTags)) {
+//            return ResultGenerator.genFailResult("请输入文章标签");
+//        }
+//        if (blogTags.trim().length() > 150) {
+//            return ResultGenerator.genFailResult("标签过长");
+//        }
         if (blogSubUrl.trim().length() > 150) {
             return ResultGenerator.genFailResult("路径过长");
         }
         if (StringUtils.isEmpty(blogContent)) {
             return ResultGenerator.genFailResult("请输入文章内容");
         }
-        if (blogTags.trim().length() > 100000) {
+        if (blogContent.trim().length() > 100000) {
             return ResultGenerator.genFailResult("文章内容过长");
         }
         if (StringUtils.isEmpty(blogCoverImage)) {
@@ -115,7 +125,8 @@ public class BlogController {
         blog.setBlogTitle(blogTitle);
         blog.setBlogSubUrl(blogSubUrl);
         blog.setBlogCategoryId(blogCategoryId);
-        blog.setBlogTags(blogTags);
+//        blog.setBlogTags(blogTags);
+        blog.setBlogTagId(blogTagId);
         blog.setBlogContent(blogContent);
         blog.setBlogCoverImage(blogCoverImage);
         blog.setBlogStatus(blogStatus);
@@ -134,7 +145,8 @@ public class BlogController {
                          @RequestParam("blogTitle") String blogTitle,
                          @RequestParam(name = "blogSubUrl", required = false) String blogSubUrl,
                          @RequestParam("blogCategoryId") Integer blogCategoryId,
-                         @RequestParam("blogTags") String blogTags,
+                         @RequestParam("blogTagId") Integer blogTagId,
+                         //@RequestParam("blogTags") String blogTags,
                          @RequestParam("blogContent") String blogContent,
                          @RequestParam("blogCoverImage") String blogCoverImage,
                          @RequestParam("blogStatus") Byte blogStatus,
@@ -145,19 +157,22 @@ public class BlogController {
         if (blogTitle.trim().length() > 150) {
             return ResultGenerator.genFailResult("标题过长");
         }
-        if (StringUtils.isEmpty(blogTags)) {
-            return ResultGenerator.genFailResult("请输入文章标签");
+        if (StringUtils.isEmpty(blogTagId)) {
+        	return ResultGenerator.genFailResult("请选择文章标签");
         }
-        if (blogTags.trim().length() > 150) {
-            return ResultGenerator.genFailResult("标签过长");
-        }
+//        if (StringUtils.isEmpty(blogTags)) {
+//            return ResultGenerator.genFailResult("请输入文章标签");
+//        }
+//        if (blogTags.trim().length() > 150) {
+//            return ResultGenerator.genFailResult("标签过长");
+//        }
         if (blogSubUrl.trim().length() > 150) {
             return ResultGenerator.genFailResult("路径过长");
         }
         if (StringUtils.isEmpty(blogContent)) {
             return ResultGenerator.genFailResult("请输入文章内容");
         }
-        if (blogTags.trim().length() > 100000) {
+        if (blogContent.trim().length() > 100000) {
             return ResultGenerator.genFailResult("文章内容过长");
         }
         if (StringUtils.isEmpty(blogCoverImage)) {
@@ -168,7 +183,8 @@ public class BlogController {
         blog.setBlogTitle(blogTitle);
         blog.setBlogSubUrl(blogSubUrl);
         blog.setBlogCategoryId(blogCategoryId);
-        blog.setBlogTags(blogTags);
+//        blog.setBlogTags(blogTags);
+        blog.setBlogTagId(blogTagId);
         blog.setBlogContent(blogContent);
         blog.setBlogCoverImage(blogCoverImage);
         blog.setBlogStatus(blogStatus);

@@ -8,6 +8,8 @@
         <result column="blog_cover_image" jdbcType="VARCHAR" property="blogCoverImage"/>
         <result column="blog_category_id" jdbcType="INTEGER" property="blogCategoryId"/>
         <result column="blog_category_name" jdbcType="VARCHAR" property="blogCategoryName"/>
+        <result column="blog_tag_id" jdbcType="INTEGER" property="blogTagId"/>
+        <result column="blog_tag_name" jdbcType="VARCHAR" property="blogTagName"/>
         <result column="blog_tags" jdbcType="VARCHAR" property="blogTags"/>
         <result column="blog_status" jdbcType="TINYINT" property="blogStatus"/>
         <result column="blog_views" jdbcType="BIGINT" property="blogViews"/>
@@ -20,7 +22,7 @@
         <result column="blog_content" jdbcType="LONGVARCHAR" property="blogContent"/>
     </resultMap>
     <sql id="Base_Column_List">
-    blog_id, blog_title, blog_sub_url, blog_cover_image, blog_category_id, blog_category_name, 
+    blog_id, blog_title, blog_sub_url, blog_cover_image, blog_category_id, blog_category_name, blog_tag_id, blog_tag_name, 
     blog_tags, blog_status, blog_views, enable_comment, is_deleted, create_time, update_time
   </sql>
     <sql id="Blob_Column_List">
@@ -122,12 +124,12 @@
     </update>
     <insert id="insert" parameterType="com.site.blog.my.core.entity.Blog">
     insert into tb_blog (blog_id, blog_title, blog_sub_url, 
-      blog_cover_image, blog_category_id, blog_category_name, 
+      blog_cover_image, blog_category_id, blog_category_name, blog_tag_id, blog_tag_name, 
       blog_tags, blog_status, blog_views, 
       enable_comment, is_deleted, create_time, 
       update_time, blog_content)
     values (#{blogId,jdbcType=BIGINT}, #{blogTitle,jdbcType=VARCHAR}, #{blogSubUrl,jdbcType=VARCHAR}, 
-      #{blogCoverImage,jdbcType=VARCHAR}, #{blogCategoryId,jdbcType=INTEGER}, #{blogCategoryName,jdbcType=VARCHAR}, 
+      #{blogCoverImage,jdbcType=VARCHAR}, #{blogCategoryId,jdbcType=INTEGER}, #{blogCategoryName,jdbcType=VARCHAR}, #{blogTagId,jdbcType=INTEGER}, #{blogTagName,jdbcType=VARCHAR}, 
       #{blogTags,jdbcType=VARCHAR}, #{blogStatus,jdbcType=TINYINT}, #{blogViews,jdbcType=BIGINT}, 
       #{enableComment,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{blogContent,jdbcType=LONGVARCHAR})
@@ -153,6 +155,12 @@
             </if>
             <if test="blogCategoryName != null">
                 blog_category_name,
+            </if>
+            <if test="blogTagId != null">
+                blog_tag_id,
+            </if>
+            <if test="blogTagName != null">
+                blog_tag_name,
             </if>
             <if test="blogTags != null">
                 blog_tags,
@@ -197,6 +205,12 @@
             </if>
             <if test="blogCategoryName != null">
                 #{blogCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="blogTagId != null">
+                #{blogTagId,jdbcType=INTEGER},
+            </if>
+            <if test="blogTagName != null">
+                #{blogTagName,jdbcType=VARCHAR},
             </if>
             <if test="blogTags != null">
                 #{blogTags,jdbcType=VARCHAR},
@@ -245,6 +259,12 @@
             <if test="blogCategoryName != null">
                 blog_category_name = #{blogCategoryName,jdbcType=VARCHAR},
             </if>
+            <if test="blogTagId != null">
+                blog_tag_id = #{blogTagId,jdbcType=INTEGER},
+            </if>
+            <if test="blogTagName != null">
+                blog_tag_name = #{blogTagName,jdbcType=VARCHAR},
+            </if>
             <if test="blogTags != null">
                 blog_tags = #{blogTags,jdbcType=VARCHAR},
             </if>
@@ -279,6 +299,8 @@
       blog_cover_image = #{blogCoverImage,jdbcType=VARCHAR},
       blog_category_id = #{blogCategoryId,jdbcType=INTEGER},
       blog_category_name = #{blogCategoryName,jdbcType=VARCHAR},
+      blog_tag_id = #{blogTagId,jdbcType=INTEGER},
+      blog_tag_name = #{blogTagName,jdbcType=VARCHAR},
       blog_tags = #{blogTags,jdbcType=VARCHAR},
       blog_status = #{blogStatus,jdbcType=TINYINT},
       blog_views = #{blogViews,jdbcType=BIGINT},
@@ -296,6 +318,8 @@
       blog_cover_image = #{blogCoverImage,jdbcType=VARCHAR},
       blog_category_id = #{blogCategoryId,jdbcType=INTEGER},
       blog_category_name = #{blogCategoryName,jdbcType=VARCHAR},
+      blog_tag_id = #{blogTagId,jdbcType=INTEGER},
+      blog_tag_name = #{blogTagName,jdbcType=VARCHAR},
       blog_tags = #{blogTags,jdbcType=VARCHAR},
       blog_status = #{blogStatus,jdbcType=TINYINT},
       blog_views = #{blogViews,jdbcType=BIGINT},

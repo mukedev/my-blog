@@ -16,6 +16,10 @@ public class Blog {
     private Integer blogCategoryId;
 
     private String blogCategoryName;
+    
+    private Integer blogTagId;
+    
+    private String blogTagName;
 
     private String blogTags;
 
@@ -145,8 +149,24 @@ public class Blog {
     public void setBlogContent(String blogContent) {
         this.blogContent = blogContent == null ? null : blogContent.trim();
     }
+    
+    public Integer getBlogTagId() {
+		return blogTagId;
+	}
 
-    @Override
+	public void setBlogTagId(Integer blogTagId) {
+		this.blogTagId = blogTagId;
+	}
+
+	public String getBlogTagName() {
+		return blogTagName;
+	}
+
+	public void setBlogTagName(String blogTagName) {
+		this.blogTagName = blogTagName;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
@@ -166,6 +186,8 @@ public class Blog {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", blogContent=").append(blogContent);
+        sb.append(", blogTagId=").append(blogTagId);
+        sb.append(", blogTagName=").append(blogTagName);
         sb.append("]");
         return sb.toString();
     }

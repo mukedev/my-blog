@@ -13,6 +13,8 @@ public class BlogListVO implements Serializable {
 
     private String blogSubUrl;
 
+    private String blogContent;
+
     private String blogCoverImage;
 
     private Integer blogCategoryId;
@@ -46,6 +48,14 @@ public class BlogListVO implements Serializable {
 
     public void setBlogSubUrl(String blogSubUrl) {
         this.blogSubUrl = blogSubUrl;
+    }
+
+    public String getBlogContent() {
+        return blogContent;
+    }
+
+    public void setBlogContent(String blogContent) {
+        this.blogContent = blogContent;
     }
 
     public String getBlogCoverImage() {

@@ -5,6 +5,8 @@ import com.site.blog.my.core.entity.BlogComment;
 import com.site.blog.my.core.entity.BlogLink;
 import com.site.blog.my.core.service.*;
 import com.site.blog.my.core.util.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,8 @@ import java.util.Map;
  */
 @Controller
 public class MyBlogController {
+
+    public final static Logger logger = LoggerFactory.getLogger(MyBlogController.class);
 
     //public static String theme = "default";
     //public static String theme = "yummy-jekyll";
@@ -47,6 +51,7 @@ public class MyBlogController {
      */
     @GetMapping({"/", "/index", "index.html"})
     public String index(HttpServletRequest request) {
+        System.out.println("request = [" + request + "]");
         return this.page(request, 1);
     }
 
@@ -61,6 +66,7 @@ public class MyBlogController {
         if (blogPageResult == null) {
             return "error/error_404";
         }
+        logger.debug("########blogPageResult:"+blogPageResult.getList());
         request.setAttribute("blogPageResult", blogPageResult);
         request.setAttribute("newBlogs", blogService.getBlogListForIndexPage(1));
         request.setAttribute("hotBlogs", blogService.getBlogListForIndexPage(0));

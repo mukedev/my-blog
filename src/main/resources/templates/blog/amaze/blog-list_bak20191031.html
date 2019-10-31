@@ -7,24 +7,7 @@
                 <th:block th:each="blog,iterStat : ${blogPageResult.list}">
                     <article class="am-g blog-entry-article">
                         <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
-                            <div class="topic-header" style="font-size: larger;color: black;">
-                                <a th:href="@{'/blog/' + ${blog.blogId}}">
-                                    <h2 th:text="${blog.blogTitle}"></h2>
-                                </a>
-                            </div>
-                            <!--<h1 class="post-index-title"><a itemtype="url" th:href="@{'/blog/' + ${blog.blogId}}">
-                                <th:block th:text="${blog.blogTitle}"></th:block>
-                            </a>
-                            </h1>-->
-                            <div class="post-content-preview article-body">
-                                <a th:href="@{'/blog/' + ${blog.blogId}}">
-                                    <p th:text="${blog.blogContent}"></p>
-                                </a>
-                            </div>
-                            <!--<div class="clearfix topic-footer">-->
-                                <!--<span class="pull-left time mobile_time">2018-01</span>-->
-                            <!--</div>-->
-                            <div class="topic-footer">
+                            <div class="topic-header">
                                 <div class="pull-left">
                                     <div class="blog-flex-center">
                                         <div class="blog-flex0">
@@ -46,10 +29,21 @@
                                 <span class="pull-right time pc_time"
                                       th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">2019-01</span>
                             </div>
+                            <h1 class="post-index-title"><a itemtype="url" th:href="@{'/blog/' + ${blog.blogId}}">
+                                <th:block th:text="${blog.blogTitle}"></th:block>
+                            </a>
+                            </h1>
+                            <div class="post-content-preview article-body">
+                                <a th:href="@{'/blog/' + ${blog.blogId}}">
+                                    <img th:src="@{${blog.blogCoverImage}}" alt=""></a>
+                            </div>
+                            <div class="clearfix topic-footer">
+                                <span class="pull-left time mobile_time">2018-01</span>
+                            </div>
                     </article>
                 </th:block>
             </th:block>
-            <!--<th:block th:if="${null != blogPageResult}">
+            <th:block th:if="${null != blogPageResult}">
                 <ul class="am-pagination">
                     <li th:class="${blogPageResult.currPage==1}?'disabled' : 'am-pagination-prev'"><a
                             th:href="@{${blogPageResult.currPage==1}?'##':'/page/' + ${blogPageResult.currPage-1}}">&laquo;</a>
@@ -78,7 +72,7 @@
                                 th:href="@{${blogPageResult.currPage==blogPageResult.totalPage}?'##' : '/page/' + ${blogPageResult.currPage+1}}">&raquo;</a>
                     </li>
                 </ul>
-            </th:block>-->
+            </th:block>
         </div>
     </main>
 </div>

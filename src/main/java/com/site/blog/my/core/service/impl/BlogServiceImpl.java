@@ -13,6 +13,8 @@ import com.site.blog.my.core.util.MarkDownUtil;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.PageResult;
 import com.site.blog.my.core.util.PatternUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class BlogServiceImpl implements BlogService {
+
+	private final static Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
 
 	@Autowired
 	private BlogMapper blogMapper;
@@ -217,6 +221,10 @@ public class BlogServiceImpl implements BlogService {
 		params.put("blogStatus", 1);// 过滤发布状态下的数据
 		PageQueryUtil pageUtil = new PageQueryUtil(params);
 		List<Blog> blogList = blogMapper.findBlogList(pageUtil);
+		for (Blog blog:blogList) {
+			logger.debug("#########blog:"+blog.toString());
+		}
+
 		List<BlogListVO> blogListVOS = getBlogListVOsByBlogs(blogList);
 		int total = blogMapper.getTotalBlogs(pageUtil);
 		PageResult pageResult = new PageResult(blogListVOS, total, pageUtil.getLimit(), pageUtil.getPage());

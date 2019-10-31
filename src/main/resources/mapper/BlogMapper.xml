@@ -14,7 +14,7 @@
         <result column="blog_status" jdbcType="TINYINT" property="blogStatus"/>
         <result column="blog_views" jdbcType="BIGINT" property="blogViews"/>
         <result column="enable_comment" jdbcType="TINYINT" property="enableComment"/>
-        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="ifindBlogLists_deleted" jdbcType="TINYINT" property="isDeleted"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
@@ -25,8 +25,11 @@
     blog_id, blog_title, blog_sub_url, blog_cover_image, blog_category_id, blog_category_name, blog_tag_id, blog_tag_name, 
     blog_tags, blog_status, blog_views, enable_comment, is_deleted, create_time, update_time
   </sql>
+    <sql id="Blob_Column_index_List">
+        case when LENGTH(blog_content) <![CDATA[ < ]]> 150 then SUBSTR(blog_content,1,150) else CONCAT(SUBSTR(blog_content,1,150),"...") end blog_content
+  </sql>
     <sql id="Blob_Column_List">
-    blog_content
+        blog_content
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
@@ -36,9 +39,11 @@
         from tb_blog
         where blog_id = #{blogId,jdbcType=BIGINT} and is_deleted = 0
     </select>
-    <select id="findBlogList" parameterType="Map" resultMap="BaseResultMap">
+    <select id="findBlogList" parameterType="Map" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_index_List"/>
         from tb_blog
         where is_deleted=0
         <if test="keyword!=null">

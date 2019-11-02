@@ -7,24 +7,39 @@
                 <th:block th:each="blog,iterStat : ${blogPageResult.list}">
                     <article class="am-g blog-entry-article">
                         <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
-                            <div class="topic-header" style="font-size: larger;color: black;">
+                            <div class="topic-header">
+                                <div class="pull-left">
+                                    <div class="blog-flex-center">
+                                        <div class="blog-flex0">
+                                            <img th:src="@{${configurations.get('yourAvatar')}}" alt=""
+                                                 class="link avatar avatar-image">
+                                        </div>
+                                        <div class="author-lockup blog-flex1">
+                                            <a class="link" href="javascript:;"
+                                               th:text="${configurations.get('yourName')}">13</a>
+                                            <span class="in">in</span>
+                                            <span class="category-name">
+                                <a class="category-name" rel="tag" th:href="@{'/category/' + ${blog.blogCategoryName}}"
+                                   th:utext="${blog.blogCategoryName}">
+                                    </a>
+                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="pull-right time pc_time"
+                                      th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">2019-01</span>
+                            </div>
+                            <h1 class="post-index-title"><a itemtype="url" th:href="@{'/blog/' + ${blog.blogId}}">
+                                <th:block th:text="${blog.blogTitle}"></th:block>
+                            </a>
+                            </h1>
+                            <div class="post-content-preview article-body">
                                 <a th:href="@{'/blog/' + ${blog.blogId}}">
-                                    <h2 th:text="${blog.blogTitle}"></h2>
-                                </a>
+                                    <img th:src="@{${blog.blogCoverImage}}" alt=""></a>
                             </div>
-                            <div class="post-content-preview article-body" style="font-style: italic;color: #a3a3a3;font-size: 14px;">
-                                <a th:href="@{'/blog/' + ${blog.blogId}}">
-                                    <p th:text="${blog.blogContent}"></p>
-                                </a>
+                            <div class="clearfix topic-footer">
+                                <span class="pull-left time mobile_time">2018-01</span>
                             </div>
-                            <div class="topic-footer">
-                                <!--<span>posted by</span>-->
-                                <span th:text="${configurations.get('yourName')}">七月的风</span>
-                                <span>发布于</span>
-                                <span
-                                        th:text="${#dates.format(blog.createTime, 'yyyy/MM/dd')}">2019,01,01</span>
-                            </div>
-                        </div>
                     </article>
                 </th:block>
             </th:block>

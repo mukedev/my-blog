@@ -14,7 +14,7 @@
         <result column="blog_status" jdbcType="TINYINT" property="blogStatus"/>
         <result column="blog_views" jdbcType="BIGINT" property="blogViews"/>
         <result column="enable_comment" jdbcType="TINYINT" property="enableComment"/>
-        <result column="ifindBlogLists_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
@@ -39,6 +39,7 @@
         from tb_blog
         where blog_id = #{blogId,jdbcType=BIGINT} and is_deleted = 0
     </select>
+    <!--返回博客首页的blog文章列表-->
     <select id="findBlogList" parameterType="Map" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -88,9 +89,12 @@
         limit #{limit}
     </select>
 
-    <select id="getBlogsPageByTagId" parameterType="Map" resultMap="BaseResultMap">
+    <!--根据博客标签返回blog文章-->
+    <select id="getBlogsPageByTagId" parameterType="Map" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_index_List"/>
         from tb_blog
         where blog_id IN (SELECT blog_id FROM tb_blog_tag_relation WHERE tag_id = #{tagId})
         AND blog_status =1 AND is_deleted=0

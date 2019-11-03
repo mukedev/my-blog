@@ -2197,8 +2197,8 @@
  }
  
  .blog-entry-article {
-   margin: 2rem 0 0;
-   padding-bottom: 2rem;
+   margin: 1rem 0 0;
+   padding-bottom: 1rem;
    border-bottom: 1px solid #e5e5e5
  }
  
@@ -3252,7 +3252,8 @@
  
  @media only screen and (min-width: 768px) {
    .intro-header {
-     margin-bottom: 20px;
+     /*margin-bottom: 20px;*/
+       margin-bottom: -28px;
      /* response on desktop */
    }
  }

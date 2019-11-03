@@ -2,6 +2,7 @@ package com.site.blog.my.core.dao;
 
 import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.util.PageQueryUtil;
+import com.site.blog.my.core.util.PageResult;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -37,4 +38,5 @@ public interface BlogMapper {
 
     int updateBlogCategorys(@Param("categoryName") String categoryName, @Param("categoryId") Integer categoryId, @Param("ids")Integer[] ids);
 
+    List<Blog> getAllBlogs();
 }

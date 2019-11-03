@@ -330,6 +330,11 @@ public class BlogServiceImpl implements BlogService {
 		return null;
 	}
 
+	@Override
+	public List<Blog> getAllBlogs() {
+		return blogMapper.getAllBlogs();
+	}
+
 	/**
 	 * 方法抽取
 	 *
@@ -395,5 +400,7 @@ public class BlogServiceImpl implements BlogService {
 		}
 		return blogListVOS;
 	}
+
+
 
 }

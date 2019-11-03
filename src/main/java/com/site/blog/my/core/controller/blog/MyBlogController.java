@@ -1,6 +1,7 @@
 package com.site.blog.my.core.controller.blog;
 
 import com.site.blog.my.core.controller.vo.BlogDetailVO;
+import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.entity.BlogComment;
 import com.site.blog.my.core.entity.BlogLink;
 import com.site.blog.my.core.service.*;
@@ -288,5 +289,18 @@ public class MyBlogController {
         } else {
             return "error/error_400";
         }
+    }
+
+    /**
+     * 目录页
+     *
+     * @return
+     */
+    @GetMapping({"/navigation"})
+    public String navigation(HttpServletRequest request) {
+        request.setAttribute("blogList", blogService.getAllBlogs());
+        request.setAttribute("pageName", "目录");
+        request.setAttribute("configurations", configService.getAllConfigs());
+        return "blog/" + theme + "/navigation";
     }
 }

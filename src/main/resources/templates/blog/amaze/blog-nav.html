@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="articles-nav-list" class="am-u-lg-8 am-u-sm-12">
+    <main class="articles-nav-list">
+        <div>
+            <th:block th:if="${null != blogList}">
+                <th:block>
+                    <article class="am-g blog-entry-article">
+                        <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
+                            <div class="topic-header" style="font-size: larger;color: black;">
+                                <h2 style="margin-top: 28px;">Blogs</h2>
+                            </div>
+                        </div>
+                    </article>
+                </th:block>
+                <th:block th:each="blog: ${blogList}">
+                    <article class="am-g blog-entry-article">
+                        <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
+                            <div class="post-preview">
+                                <font color="blue" th:text="'['+${#dates.format(blog.createTime,'yyyy/MM/dd')}+']'">[2019/01/01]</font>
+                                <a target="_blank" th:href="@{'/blog/' + ${blog.blogId}}">
+                                    <span th:text="${blog.blogTitle}"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </th:block>
+            </th:block>
+        </div>
+    </main>
+</div>
+</html>

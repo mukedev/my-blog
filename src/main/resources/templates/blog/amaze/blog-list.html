@@ -7,12 +7,12 @@
                 <th:block th:each="blog,iterStat : ${blogPageResult.list}">
                     <article class="am-g blog-entry-article">
                         <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
-                            <div class="topic-header" style="font-size: larger;color: black;">
+                            <div class="topic-header">
                                 <a th:href="@{'/blog/' + ${blog.blogId}}">
                                     <h2 th:text="${blog.blogTitle}"></h2>
                                 </a>
                             </div>
-                            <div class="post-content-preview article-body" style="font-style: italic;color: #a3a3a3;font-size: 14px;">
+                            <div class="post-content-preview article-body">
                                 <a th:href="@{'/blog/' + ${blog.blogId}}">
                                     <p th:text="${blog.blogContent}"></p>
                                 </a>

@@ -88,6 +88,9 @@ $('#confirmButton').click(function () {
     //var blogTags = $('#blogTags').val();
     var blogTagId = $('#blogTagId').val();
     console.log(blogTagId);
+    console.log(blogEditor.getMarkdown());
+    console.log("###########");
+    console.log(blogEditor.getHTML());
     var blogContent = blogEditor.getMarkdown();
     if (isNull(blogTitle)) {
         swal("请输入文章标题", {

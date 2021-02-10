@@ -1963,6 +1963,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .am-article-bd img {
+    display: block;
     max-width: 100%;
 }
 
@@ -3810,59 +3811,56 @@ code {
     font-size: 90%;
 }
 
-----------------------------手动更改博文样式，已改成与md同步------------begin--
+.article-trigger h1,
+.article-trigger h2,
+.article-trigger h3,
+.article-trigger h4,
+.article-trigger h5 {
+    display: table;
+    position: relative;
+}
 
-/*.article-trigger h1,*/
-/*.article-trigger h2,*/
-/*.article-trigger h3,*/
-/*.article-trigger h4,*/
-/*.article-trigger h5 {*/
-    /*display: table;*/
-    /*position: relative;*/
-/*}*/
+.article-trigger h1 a,
+.article-trigger h2 a,
+.article-trigger h3 a,
+.article-trigger h4 a,
+.article-trigger h5 a {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+}
 
-/*.article-trigger h1 a,*/
-/*.article-trigger h2 a,*/
-/*.article-trigger h3 a,*/
-/*.article-trigger h4 a,*/
-/*.article-trigger h5 a {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*top: 0;*/
-    /*bottom: 0;*/
-    /*display: block;*/
-/*}*/
+.article-trigger h2 {
+    padding-left: 1em;
+}
 
-/*.article-trigger h2 {*/
-    /*padding-left: 1em;*/
-/*}*/
+.article-trigger h3 {
+    padding-left: 1.5em;
+}
 
-/*.article-trigger h3 {*/
+.article-trigger h2::before,
+.article-trigger h3::before {
+    position: absolute;
+    left: 0;
+    color: #337ab7;
+}
 
-/*}*/
+.article-trigger h2::before {
+    font-weight: 600;
+    content: '#';
+}
 
-/*.article-trigger h2::before,*/
-/*.article-trigger h3::before {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*color: #337ab7;*/
-/*}*/
-/*.article-trigger h1::before {*/
-    /*border-bottom: 1px solid #eee;*/
-/*}*/
+.article-trigger h3::before {
+    font-weight: 500;
+    content: '##';
+}
 
-/*.article-trigger h2::before {*/
-
-/*}*/
-
-/*.article-trigger h3::before {*/
-
-/*}*/
-
-/*.article-trigger a {*/
-    /*color: #5085ff;*/
-/*}*/
+.article-trigger a {
+    color: #5085ff;
+}
 
 .topic-header {
     padding-bottom: 0px;
@@ -4865,10 +4863,3 @@ aside.comments .comment header .meta {
     line-height: 18px;
     display: inline-block;
 }
-
-------------------------修改markdown的样式----begin
-
-
-
-
-------------------------修改markdown的样式----begin

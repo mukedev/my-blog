@@ -8,8 +8,11 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
     <link rel="stylesheet" th:href="@{/blog/amaze/css/base.css}">
+
     <!-- highlight -->
     <link rel="stylesheet" th:href="@{/blog/plugins/highlight/styles/paraiso-light.css}">
+    <!--博客内容的样式，与md同步-->
+    <link th:href="@{/admin/plugins/editormd/css/editormd.css}" rel="stylesheet"/>
     <style>
         .hljs {
             background: none;
@@ -55,13 +58,14 @@
                 </div>
             </div>
         </div>
+    </div>
 </header>
 <div class="container">
     <div class="am-g am-g-fixed blog-fixed">
         <div class="am-u-lg-12 am-u-sm-12">
             <article class="am-article blog-article-p article-trigger">
-                <div id="post-content" class="am-article-bd article-body">
-                    <th:block th:utext="${blogDetailVO.blogContent}"/>
+                <div id="post-content" class="am-article-bd article-body markdown-body">
+                    <th th:utext="${blogDetailVO.blogContent}" />
                     <aside class="blog-rights clearfix">
                         <p>本站文章除注明转载/出处外，皆为作者原创，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
                     </aside>
@@ -192,6 +196,7 @@
 </body>
 <script th:src="@{/blog/default/js/jquery.min.js}"></script>
 <script th:src="@{/blog/plugins/highlight/highlight.pack.js}"></script>
+<!--<script th:src="@{/admin/plugins/editormd/lib/prettify.min.js}"></script>-->
 <script th:src="@{/blog/plugins/comment/valid.js}"></script>
 <script th:src="@{/blog/plugins/comment/comment.js}"></script>
 <!-- sweetalert -->
@@ -219,6 +224,9 @@
         });
 
         $('article h1, article h2, article h3, article h4, article h5').find('a').removeAttr('target')
+
+        // $('pre').addClass("prettyprint linenums");
+
     })
 </script>
 </html>

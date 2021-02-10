@@ -97,9 +97,6 @@ public class BlogController {
         if (StringUtils.isEmpty(blogTagId)) {
         	return ResultGenerator.genFailResult("请选择文章标签");
         }
-//        if (StringUtils.isEmpty(blogTags)) {
-//            return ResultGenerator.genFailResult("请输入文章标签");
-//        }
 //        if (blogTags.trim().length() > 150) {
 //            return ResultGenerator.genFailResult("标签过长");
 //        }
